@@ -10,6 +10,16 @@ Welcome to my Backend Development learning repository! This project serves as a 
 backend/
 ├── MongoDB/                      # Database Schemas & Data Modeling
 │   └── models/
+│       ├── Ecommerce/            # E-commerce Application Models
+│       │   ├── categories.models.js
+│       │   ├── order.model.js
+│       │   ├── product.models.js
+│       │   └── user.models.js
+│       ├── HospitalManagement/   # Hospital Management Models
+│       │   ├── doctors.models.js
+│       │   ├── hospitals.models.js
+│       │   ├── medicalRecords.models.js
+│       │   └── patients.models.js
 │       └── todos/                # Todo Application Models
 │           ├── sub_todo.models.js
 │           ├── todo.models.js
@@ -58,11 +68,27 @@ Located in [`express/`](./express/), this directory focuses on constructing a ro
 *   **Environment Configuration**: Uses `dotenv` to load environment variables (like `PORT`) securely.
 
 ### 3. Data Modeling with MongoDB & Mongoose
-Located in [`MongoDB/`](./MongoDB/), this directory contains design schemas showcasing relational modeling using Mongoose. The database structures represent a multi-layer **Todo Application**:
+Located in [`MongoDB/`](./MongoDB/), this directory contains database schemas showcasing schema design, validation, and relational/nested data modeling using Mongoose.
 
+#### A. Todo Application Models
+Located in [`MongoDB/models/todos/`](./MongoDB/models/todos/):
 *   **User Schema ([`user.models.js`](./MongoDB/models/todos/user.models.js))**: Defines users with unique, lowercase usernames and emails, and password length constraints.
 *   **Todo Schema ([`todo.models.js`](./MongoDB/models/todos/todo.models.js))**: Implements task content, completion flags, a reference relationship (`createdBy` mapping to `User`), and an array of sub-tasks.
 *   **Sub-Todo Schema ([`sub_todo.models.js`](./MongoDB/models/todos/sub_todo.models.js))**: Implements nested sub-tasks linked back to their creators.
+
+#### B. E-Commerce Platform Models
+Located in [`MongoDB/models/Ecommerce/`](./MongoDB/models/Ecommerce/):
+*   **User Schema ([`user.models.js`](./MongoDB/models/Ecommerce/user.models.js))**: Models user details with validated, lowercase, unique username and email, password length restriction, and unique contact number.
+*   **Category Schema ([`categories.models.js`](./MongoDB/models/Ecommerce/categories.models.js))**: Manages product categories.
+*   **Product Schema ([`product.models.js`](./MongoDB/models/Ecommerce/product.models.js))**: Stores product properties including title, description, image URL, price, stock availability, category reference (`Categories`), and owner reference (`User`).
+*   **Order Schema ([`order.model.js`](./MongoDB/models/Ecommerce/order.model.js))**: Details order transactions, linking to a customer (`User`), address, status (enum: `PENDING`, `CANCELLED`, `DELIVERED`), transaction details, and a nested list of items containing product IDs and quantities.
+
+#### C. Hospital Management System Models
+Located in [`MongoDB/models/HospitalManagement/`](./MongoDB/models/HospitalManagement/):
+*   **Hospital Schema ([`hospitals.models.js`](./MongoDB/models/HospitalManagement/hospitals.models.js))**: Captures hospital profiles including address, city, pin code, and specialized medical departments.
+*   **Doctor Schema ([`doctors.models.js`](./MongoDB/models/HospitalManagement/doctors.models.js))**: Represents medical staff details such as qualifications, experience in years, salary, and active affiliations with hospitals.
+*   **Patient Schema ([`patients.models.js`](./MongoDB/models/HospitalManagement/patients.models.js))**: Stores patient profiles containing name, age, gender (enum: `M`, `F`, `O`), blood group, diagnosis, and the hospital they are currently admitted to.
+*   **Medical Records Schema ([`medicalRecords.models.js`](./MongoDB/models/HospitalManagement/medicalRecords.models.js))**: Keeps logs of diagnostic records, associating them with a patient, timestamp, and specific examination details.
 
 ---
 
